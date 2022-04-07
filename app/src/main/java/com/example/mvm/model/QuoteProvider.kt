@@ -1,6 +1,6 @@
 package com.example.mvm.model
 
-//
+//Provider of data (example)
 class QuoteProvider {
     companion object  {
         fun random():QuoteModel{
