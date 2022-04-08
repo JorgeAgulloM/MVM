@@ -3,6 +3,7 @@ package com.example.mvm.ui.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import com.example.mvm.ViewModel.QuoteViewModel
 import com.example.mvm.databinding.ActivityMainBinding
@@ -19,10 +20,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        quoteViewModel.onCreate()
+
         //when the lifeData has a change this code will be executed.
         quoteViewModel.quoteModel.observe(this, Observer { currentQuote ->
             binding.tvQuote.text = currentQuote.quote
             binding.tvAuthor.text = currentQuote.author
+        })
+
+        quoteViewModel.isLoading.observe(this, Observer {
+            binding.progress.isVisible = it
         })
 
         //when the display is clicked on, the data to be displayed will be changed randomly.
