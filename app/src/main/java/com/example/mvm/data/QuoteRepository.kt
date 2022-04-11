@@ -6,12 +6,13 @@ import com.example.mvm.data.network.QuoteService
 import javax.inject.Inject
 
 class QuoteRepository @Inject constructor(
-    private val api:QuoteService
+    private val api:QuoteService,
+    private val quoteProvider: QuoteProvider
 ){
     suspend fun getAllQuotes():List<QuoteModel>{
         //Coroutine
         val response: List<QuoteModel> = api.getQuotes()
-        QuoteProvider.quotes = response
+        quoteProvider.quotes = response
         return response
     }
 }
