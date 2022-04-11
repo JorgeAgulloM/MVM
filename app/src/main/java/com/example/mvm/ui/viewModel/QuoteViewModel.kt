@@ -4,13 +4,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mvm.data.model.QuoteModel
-import com.example.mvm.data.model.QuoteProvider
 import com.example.mvm.domain.GetQuotesUseCase
 import com.example.mvm.domain.GetRandomQuoteUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 //Extends of ViewModel
-class QuoteViewModel : ViewModel() {
+@HiltViewModel
+class QuoteViewModel @Inject constructor(): ViewModel() {
 
     //Encapsulated the LiveData
     val quoteModel = MutableLiveData<QuoteModel>()
