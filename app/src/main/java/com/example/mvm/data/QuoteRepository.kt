@@ -11,7 +11,7 @@ class QuoteRepository @Inject constructor(
 ){
     suspend fun getAllQuotes():List<QuoteModel>{
         //Coroutine
-        val response: List<QuoteModel> = api.getQuotes()
+        val response = api.getQuotes()
         quoteProvider.quotes = response
         return response
     }
