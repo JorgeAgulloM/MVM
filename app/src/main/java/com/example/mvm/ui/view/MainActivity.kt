@@ -29,6 +29,9 @@ class MainActivity : AppCompatActivity() {
             binding.tvQuote.text = currentQuote.quote
             binding.tvAuthor.text = currentQuote.author
         })
+        quoteViewModel.isLoading.observe(this, Observer {
+            binding.loading.isVisible = it
+        })
 
         quoteViewModel.isLoading.observe(this, Observer {
             binding.progress.isVisible = it
