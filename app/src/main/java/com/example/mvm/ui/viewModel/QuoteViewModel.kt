@@ -10,7 +10,11 @@ import com.example.mvm.domain.GetRandomQuoteUseCase
 import kotlinx.coroutines.launch
 
 //Extends of ViewModel
-class QuoteViewModel : ViewModel() {
+@HiltViewModel
+class QuoteViewModel @Inject constructor(
+    private val getQuoteUseCase:GetQuotesUseCase,
+    private val getRandomQuoteUseCase:GetRandomQuoteUseCase
+) : ViewModel() {
 
     //Encapsulated the LiveData
     val quoteModel = MutableLiveData<QuoteModel>()
@@ -34,6 +38,13 @@ class QuoteViewModel : ViewModel() {
 
     //function to retrieve data once the user taps on the screen.
     fun randomQuote(){
+        isLoading.postValue(true)
+        val quote: QuoteModel? = getRandomQuoteUseCase()
+        if (quote!=null) {
+            quoteModel.postValue(quote)
+        }
+        isLoading.postValue(false)
+
         //A new input is requested to the model
         isLoading.postValue(true)
         val quote = getRandomQuoteUseCase()
@@ -42,4 +53,6 @@ class QuoteViewModel : ViewModel() {
         }
         isLoading.postValue(false)
     }
+
+
 }

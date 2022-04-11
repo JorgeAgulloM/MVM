@@ -7,7 +7,9 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import com.example.mvm.ViewModel.QuoteViewModel
 import com.example.mvm.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -29,6 +31,10 @@ class MainActivity : AppCompatActivity() {
         })
         quoteViewModel.isLoading.observe(this, Observer {
             binding.loading.isVisible = it
+        })
+
+        quoteViewModel.isLoading.observe(this, Observer {
+            binding.progress.isVisible = it
         })
 
         //when the display is clicked on, the data to be displayed will be changed randomly.
