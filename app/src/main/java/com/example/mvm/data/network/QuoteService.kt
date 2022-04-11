@@ -5,10 +5,11 @@ import com.example.mvm.data.model.QuoteModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
+import javax.inject.Inject
 
 /*With this class we will connect to the repository which will decide where to get the data from,
 so if we change the backend service, we will only need to change this service.*/
-class QuoteService {
+class QuoteService @Inject constructor(){
 
     private val retrofit = RetrofitHelper.getRetrofit()
 
