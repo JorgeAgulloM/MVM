@@ -12,14 +12,14 @@ import javax.inject.Inject
 
 //Extends of ViewModel
 @HiltViewModel
-class QuoteViewModel @Inject constructor(): ViewModel() {
+class QuoteViewModel @Inject constructor(
+    private val getQuotesUseCase:GetQuotesUseCase,
+    private val getRandomQuoteUseCase:GetRandomQuoteUseCase
+): ViewModel() {
 
     //Encapsulated the LiveData
     val quoteModel = MutableLiveData<QuoteModel>()
     val isLoading = MutableLiveData<Boolean>()
-
-    var getQuotesUseCase = GetQuotesUseCase()
-    var getRandomQuoteUseCase = GetRandomQuoteUseCase()
 
     fun onCreate() {
         viewModelScope.launch {
