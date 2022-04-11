@@ -1,5 +1,6 @@
 package com.example.mvm.di
 
+import com.example.mvm.data.network.QuoteApiClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,6 +21,12 @@ object NetworkModule {
             .baseUrl("https://drawsomething-59328-default-rtdb.europe-west1.firebasedatabase.app/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideQuoteApiClient(retrofit: Retrofit):QuoteApiClient {
+        return retrofit.create(QuoteApiClient::class.java)
     }
 
 }
