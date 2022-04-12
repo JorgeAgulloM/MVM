@@ -3,6 +3,7 @@ package com.example.mvm.data.database.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.mvm.domain.model.Quote
 
 @Entity(tableName = "quote_table")
 data class QuoteEntity(
@@ -11,3 +12,5 @@ data class QuoteEntity(
     @ColumnInfo(name = "quote") val quote:String,
     @ColumnInfo(name = "author") val author:String
     )
+
+fun Quote.toDataBase() = QuoteEntity(quote = quote, author = author)
