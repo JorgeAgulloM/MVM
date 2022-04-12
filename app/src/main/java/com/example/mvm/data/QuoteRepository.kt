@@ -3,7 +3,6 @@ package com.example.mvm.data
 import com.example.mvm.data.dao.QuoteDao
 import com.example.mvm.data.database.entities.QuoteEntity
 import com.example.mvm.data.model.QuoteModel
-import com.example.mvm.data.model.QuoteProvider
 import com.example.mvm.data.network.QuoteService
 import com.example.mvm.domain.model.Quote
 import com.example.mvm.domain.model.toDomain

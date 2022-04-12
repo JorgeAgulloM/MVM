@@ -3,9 +3,9 @@ package com.example.mvm.ViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mvm.data.model.QuoteModel
 import com.example.mvm.domain.GetQuotesUseCase
 import com.example.mvm.domain.GetRandomQuoteUseCase
+import com.example.mvm.domain.model.Quote
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,7 +18,7 @@ class QuoteViewModel @Inject constructor(
 ): ViewModel() {
 
     //Encapsulated the LiveData
-    val quoteModel = MutableLiveData<QuoteModel>()
+    val quoteModel = MutableLiveData<Quote>()
     val isLoading = MutableLiveData<Boolean>()
 
     fun onCreate() {
@@ -36,12 +36,14 @@ class QuoteViewModel @Inject constructor(
 
     //function to retrieve data once the user taps on the screen.
     fun randomQuote(){
-        //A new input is requested to the model
-        isLoading.postValue(true)
-        val quote = getRandomQuoteUseCase()
-        if (quote != null) {
-            quoteModel.postValue(quote!!)
+        viewModelScope.launch {
+            //A new input is requested to the model
+            isLoading.postValue(true)
+            val quote = getRandomQuoteUseCase()
+            if (quote != null) {
+                quoteModel.postValue(quote!!)
+            }
+            isLoading.postValue(false)
         }
-        isLoading.postValue(false)
     }
 }
